@@ -10,14 +10,14 @@
 const request = require('request');
 const config = require('./.secrets_config');
 
-const JWT = process.env.JWT || config.jwt;
-const GH_TOKEN = process.env.GH_TOKEN || config.ghToken; // *some Github tokens are named differently
-const NPM_TOKEN = process.env.NPM_TOKEN || config.npmToken;
-const K8S_TOKEN = process.env.K8S_TOKEN || config.k8sToken;
-const DOCKER_TRIGGER = process.env.DOCKER_TRIGGER || config.dockerTrigger;
-const COVERALLS_REPO_TOKEN = process.env.COVERALLS_REPO_TOKEN || config.coverallsRepoToken;
-const ACCESS_KEY = process.env.ACCESS_KEY || config.accessKey;
-const INSTANCE = process.env.INSTANCE || config.instance || 'http://localhost:8080';
+const JWT = config.jwt;
+const GH_TOKEN = config.ghToken; // *some Github tokens are named differently
+const NPM_TOKEN = config.npmToken;
+const K8S_TOKEN = config.k8sToken;
+const DOCKER_TRIGGER = config.dockerTrigger;
+const COVERALLS_REPO_TOKEN = config.coverallsRepoToken;
+const ACCESS_KEY = config.accessKey;
+const INSTANCE = config.instance || 'http://localhost:8080';
 
 // Need NPM_TOKEN and GH_TOKEN secrets
 const nodeRepos = [
