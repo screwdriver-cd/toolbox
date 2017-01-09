@@ -10,3 +10,10 @@ This script will create all pipelines and their corresponding secrets, except fo
 $ npm install
 $ node mass-create-pipelines.js
 ```
+
+## To tag stable image:
+Run `stable.sh`. For example, to retag latest UI as stable:
+
+```
+./stable.sh ui latest stable
+```
