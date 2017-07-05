@@ -53,3 +53,12 @@ $ ./git-latest.sh
 $ cat VERSION
 v1.2.3
 ```
+
+## Install hyperd and its dependencies on nodes
+You need to ssh to the K8S nodes first and then run the script. The script will install hyperd and its dependencies and start the hyperd service. Hyperd is needed to start a vm with `executor-k8s-vm`.
+
+```bash
+$ sudo bash ./hyper_install.sh
+$ sudo hyperctl list # To ensure the script installed correctly
+POD ID              POD Name            VM name             Status
+```
