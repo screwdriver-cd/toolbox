@@ -7,7 +7,7 @@ if [ -z "$DOCKER_TAG" ] || [ -z "$DOCKER_REPO" ]; then
 fi
 
 function check_status {
-  TOKEN=`wget -q -O - "https://auth.docker.io/token?service=registry.docker.io&scope=repository:$DOCKER_REPO:pull" | sed -e 's/{"token":"//g' -e 's/"}//g'`
+  TOKEN=`wget -q -O - "https://auth.docker.io/token?service=registry.docker.io&scope=repository:$DOCKER_REPO:pull" | python -c "import sys, json; print(json.load(sys.stdin))['token']"`
   wget -S --spider -q --header="Authorization: Bearer $TOKEN" https://index.docker.io/v2/$DOCKER_REPO/manifests/$DOCKER_TAG > /dev/null 2>&1
 }
 
