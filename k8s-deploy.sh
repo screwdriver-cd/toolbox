@@ -27,4 +27,4 @@ curl -k -i \
   -H "Content-Type: application/strategic-merge-patch+json" \
   -d $BODY \
   $URL > /tmp/k8s_out
-grep "200 OK" /tmp/k8s_out || (echo "Failed deployment" && cat /tmp/k8s_out && exit 1)
+head -1 /tmp/k8s_out | grep "200" || (echo "Failed deployment" && cat /tmp/k8s_out && exit 1)
