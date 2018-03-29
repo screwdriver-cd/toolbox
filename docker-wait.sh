@@ -16,8 +16,8 @@ echo Looking for image $DOCKER_REPO:$DOCKER_TAG
 MINUTES=0
 until check_status
 do
-  if [ $MINUTES -gt 20 ] ; then
-    echo "Timed out after 20 minutes"
+  if [ $MINUTES -gt 35 ] ; then
+    echo "Timed out after 35 minutes"
     exit 1
   fi
 
