@@ -19,6 +19,3 @@ echo Bumping the version
 
 echo Publish the package
 npm publish
-
-echo Push the new tag to GitHub
-git push origin --tags -q
