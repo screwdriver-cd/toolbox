@@ -1,7 +1,7 @@
 /**
-* To run, put secrets in .secrets_config.json
-* Use the command:
-* node mass-create-pipelines.js
+ * To run, put secrets in .secrets_config.json
+ * Use the command:
+ * node mass-create-pipelines.js
  */
 
 /* eslint-disable */
