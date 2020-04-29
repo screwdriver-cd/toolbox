@@ -9,8 +9,8 @@ fi
 GITHUB_RELEASE=/tmp/bin/linux/amd64/github-release
 if [ ! -f "$GITHUB_RELEASE" ] ; then
   echo Downloading github-release
-  wget -q -O - https://github.com/aktau/github-release/releases/latest \
-     | egrep -o '/aktau/github-release/releases/download/v[0-9.]*/linux-amd64-github-release.tar.bz2' \
+  wget -q -O - https://github.com/github-release/github-release/releases/latest \
+     | egrep -o '/github-release/github-release/releases/download/v[0-9.]*/linux-amd64-github-release.tar.bz2' \
      | wget --base=http://github.com/ -i - -O /tmp/linux-amd64-github-release.tar.bz2
   tar -xvf /tmp/linux-amd64-github-release.tar.bz2 -C /tmp
   chmod +x $GITHUB_RELEASE
