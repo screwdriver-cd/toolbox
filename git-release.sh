@@ -10,8 +10,8 @@ GITHUB_RELEASE=/tmp/linux-amd64-github-release
 if [ ! -f "$GITHUB_RELEASE" ] ; then
   echo Downloading github-release
   wget -q -O - https://github.com/github-release/github-release/releases/latest \
-     | egrep -o '/github-release/github-release/releases/download/v[0-9.]*/linux-amd64-github-release.tar.bz2' \
-     | wget --base=http://github.com/ -i - -O /tmp/linux-amd64-github-release.tar.bz2
+     | egrep -o '/github-release/github-release/releases/download/v[0-9.]*/linux-amd64-github-release.bz2' \
+     | wget --base=http://github.com/ -i - -O /tmp/linux-amd64-github-release.bz2
   bzip2 -dv /tmp/linux-amd64-github-release.bz2
   chmod +x $GITHUB_RELEASE
 fi
