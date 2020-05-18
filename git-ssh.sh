@@ -1,6 +1,13 @@
 #!/bin/bash -e
 # GIT_KEY = SSH Deployment key
-if [ -z "$GIT_KEY" ]; then
+# GIT_KEY_BASE64 = SSH Deployment key
+# Generating GIT_KEY
+#  cat id_rsa | tr "\n" "*" | sed -E 's/([^*]{40,64}) / \1 /g' > t2
+#  Add space before -----END OPENSSH PRIVATE KEY-----
+# Generating GIT_KEY_BASE64
+# GIT_KEY_BASE64=$(cat id_rsa  | base64 -w 0)
+
+if [ -z "$GIT_KEY" ]  && [ -z "$GIT_KEY_BASE64" ]; then
   echo Unable to git ssh, missing environment variables
   exit 2
 fi
@@ -24,7 +31,11 @@ echo Starting ssh-agent
 eval "$(ssh-agent -s)"
 
 echo Loading github key
-echo $GIT_KEY | sed -E 's/([^ ]{40,64}) /*\1*/g' | tr "*" "\n" | sed '/^$/d' > /tmp/git_key
+if ! [ -z "$GIT_KEY" ]; then
+        echo $GIT_KEY | sed -E 's/([^ ]{40,64}) /*\1*/g' | tr "*" "\n" | sed '/^$/d' > /tmp/git_key
+else
+        printf '%s\n' $GIT_KEY_BASE64 | base64 -d > /tmp/git_key
+fi
 chmod 600 /tmp/git_key
 ssh-keygen -y -f /tmp/git_key > /tmp/git_key.pub
 ssh-keygen -l -f /tmp/git_key.pub
