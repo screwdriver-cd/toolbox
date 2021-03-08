@@ -18,7 +18,7 @@ if [ ! -z "$K8S_ENV_KEY" ] && [ ! -z "$K8S_ENV_VALUE" ]; then
 fi
 
 echo "Triggering Kubernetes deployment"
-URL=https://${K8S_HOST}/apis/extensions/v1beta1/namespaces/sd/deployments/${K8S_DEPLOYMENT}
+URL=https://${K8S_HOST}/apis/extensions/v1/namespaces/sd/deployments/${K8S_DEPLOYMENT}
 BODY="{\"spec\":{\"template\":{\"spec\":{\"containers\":[{\"name\":\"${K8S_CONTAINER}\",\"image\":\"${K8S_IMAGE}:${K8S_TAG}\"${ENVIRO_MOD}}]}}}}"
 curl -k -i \
   -XPATCH \
