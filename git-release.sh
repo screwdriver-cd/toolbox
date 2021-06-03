@@ -35,5 +35,7 @@ fi
 
 echo "Creating release $GIT_TAG for $GIT_ORG / $GIT_REPO"
 
+$GITHUB_RELEASE info --user $GIT_ORG --repo $GIT_REPO
+ls-lrt
 $GITHUB_RELEASE release --user $GIT_ORG --repo $GIT_REPO --tag $GIT_TAG --name $GIT_TAG
 $GITHUB_RELEASE upload --user $GIT_ORG --repo $GIT_REPO --tag $GIT_TAG --name $RELEASE_FILE --file $RELEASE_FILE
