@@ -1,7 +1,8 @@
 #!/bin/bash -e
 # GITHUB_TOKEN = Token for updating your git repo
-# RELEASE_FILE = File to release
-if [ -z "$GITHUB_TOKEN" ] || [ -z "$RELEASE_FILE" ]; then
+# RELEASE_FILE = File to release or
+# RELEASE_FILES = list of files to release (strings seperated by space)
+if [ -z "$GITHUB_TOKEN" ] || [ -z "$RELEASE_FILE" ] || [ -z "$RELEASE_FILES" ]; then
   echo Unable to release, missing environment variables
   exit 2
 fi
@@ -37,4 +38,19 @@ echo "Creating release $GIT_TAG for $GIT_ORG / $GIT_REPO"
 
 $GITHUB_RELEASE --version
 $GITHUB_RELEASE release --user $GIT_ORG --repo $GIT_REPO --tag $GIT_TAG --name $GIT_TAG
-$GITHUB_RELEASE upload --user $GIT_ORG --repo $GIT_REPO --tag $GIT_TAG --name $RELEASE_FILE --file $RELEASE_FILE
+
+if [ ! -z "$RELEASE_FILES" ];then
+  files=($RELEASE_FILES) 
+  for i in "${files[@]}"
+  do
+    if [ -f $i ];then
+      $GITHUB_RELEASE upload --user $GIT_ORG --repo $GIT_REPO --tag $GIT_TAG --name $i --file $i
+    else
+      echo "Unable to release, file does not exist"
+    fi
+  done
+else
+  $GITHUB_RELEASE upload --user $GIT_ORG --repo $GIT_REPO --tag $GIT_TAG --name $RELEASE_FILE --file $RELEASE_FILE
+fi
+
+
