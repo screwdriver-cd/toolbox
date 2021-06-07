@@ -2,7 +2,7 @@
 # GITHUB_TOKEN = Token for updating your git repo
 # RELEASE_FILE = File to release or
 # RELEASE_FILES = list of files to release (strings seperated by space)
-if [ -z "$GITHUB_TOKEN" ] || [ -z "$RELEASE_FILE" ] || [ -z "$RELEASE_FILES" ]; then
+if [ -z "$GITHUB_TOKEN" ] || ([ -z "$RELEASE_FILE" ] && [ -z "$RELEASE_FILES" ]); then
   echo Unable to release, missing environment variables
   exit 2
 fi
