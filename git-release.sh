@@ -18,7 +18,18 @@ if [ ! -f "$GITHUB_RELEASE" ] ; then
 fi
 
 # https://github.com/screwdriver-cd/gitversion/releases
-GIT_VERSION=/opt/sd/gitversion
+if [ "$SCREWDRIVER" == true ]; then
+  GIT_VERSION=/opt/sd/gitversion
+else
+  GIT_VERSION=/tmp/gitversion
+  if [ ! -f "$GIT_VERSION" ] ; then
+    echo Downloading gitversion
+    wget -q -O - https://github.com/screwdriver-cd/gitversion/releases/latest \
+      | egrep -o '/screwdriver-cd/gitversion/releases/download/v[0-9.]*/gitversion_linux_amd64' \
+      | wget --base=http://github.com/ -i - -O /tmp/gitversion
+    chmod +x $GIT_VERSION
+  fi
+fi
 
 GIT_ORG=`git remote -v | grep fetch | sed 's/ (fetch)//' | cut -d'/' -f4`
 GIT_REPO=`git remote -v | grep fetch | sed 's/ (fetch)//' | cut -d'/' -f5`
