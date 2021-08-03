@@ -48,6 +48,8 @@ $ ./docker-wait.sh
 ## Get Latest Tag
 Checks the Git tags for the latest version and writes it to a file.
 
+*requires either Linux or Screwdriver build environment to run*
+
 ```bash
 $ ./git-latest.sh
 $ cat VERSION
