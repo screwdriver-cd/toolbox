@@ -24,14 +24,8 @@ echo Push the new tag to GitHub
 git push origin --tags -q
 
 echo Tee latest tag to VERSION
-GIT_VERSION=/tmp/gitversion
-if [ ! -f "$GIT_VERSION" ] ; then
-    echo Downloading gitversion
-    wget -q -O - https://github.com/screwdriver-cd/gitversion/releases/latest \
-       | egrep -o '/screwdriver-cd/gitversion/releases/download/v[0-9.]*/gitversion_linux_amd64' \
-       | wget --base=http://github.com/ -i - -O /tmp/gitversion
-    chmod +x $GIT_VERSION
-fi
+# https://github.com/screwdriver-cd/gitversion/releases
+GIT_VERSION=/opt/sd/gitversion
 
 echo Getting latest version
 $GIT_VERSION --prefix v show | tee VERSION
