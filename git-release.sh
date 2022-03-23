@@ -40,12 +40,13 @@ else
 fi
 
 echo "Creating release $GIT_TAG for $GIT_ORG / $GIT_REPO"
-
 $GITHUB_RELEASE --version
 
 echo "Creating tag $GIT_TAG for $GIT_ORG / $GIT_REPO"
-
 $GITHUB_RELEASE release --user $GIT_ORG --repo $GIT_REPO --tag $GIT_TAG --name $GIT_TAG
+
+echo "Querying tag $GIT_TAG for $GIT_ORG / $GIT_REPO"
+$GITHUB_RELEASE info --user $GIT_ORG --repo $GIT_REPO --tag $GIT_TAG
 
 if [ ! -z "$RELEASE_FILES" ];then
   files=($RELEASE_FILES)
@@ -63,7 +64,7 @@ if [ ! -z "$RELEASE_FILES" ];then
   done
 else
   echo "Uploading file: $RELEASE_FILE"
-  $GITHUB_RELEASE upload --user $GIT_ORG --repo $GIT_REPO --tag $GIT_TAG --name $RELEASE_FILE --file $RELEASE_FILE
+  $GITHUB_RELEASE upload --user $GIT_ORG --repo $GIT_REPO --name $RELEASE_FILE --file $RELEASE_FILE
 fi
 
 
