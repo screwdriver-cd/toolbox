@@ -64,7 +64,7 @@ if [ ! -z "$RELEASE_FILES" ];then
   done
 else
   echo "Uploading file: $RELEASE_FILE"
-  $GITHUB_RELEASE upload --user $GIT_ORG --repo $GIT_REPO --name $RELEASE_FILE --file $RELEASE_FILE
+  $GITHUB_RELEASE upload --user $GIT_ORG --repo $GIT_REPO --tag $GIT_TAG --name $RELEASE_FILE --file $RELEASE_FILE
 fi
 
 
