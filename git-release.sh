@@ -10,7 +10,7 @@ fi
 GITHUB_RELEASE=/tmp/linux-amd64-github-release
 if [ ! -f "$GITHUB_RELEASE" ] ; then
   echo Downloading github-release
-  wget -q -O - https://github.com/github-release/github-release/releases/latest \
+  wget -q -O - https://api.github.com/repos/github-release/github-release/releases/latest \
      | egrep -o '/github-release/github-release/releases/download/v[0-9.]*/linux-amd64-github-release.bz2' \
      | wget --base=http://github.com/ -i - -O /tmp/linux-amd64-github-release.bz2
   bzip2 -dv /tmp/linux-amd64-github-release.bz2
@@ -24,7 +24,7 @@ else
   GIT_VERSION=/tmp/gitversion
   if [ ! -f "$GIT_VERSION" ] ; then
     echo Downloading gitversion
-    wget -q -O - https://github.com/screwdriver-cd/gitversion/releases/latest \
+    wget -q -O - https://api.github.com/repos/screwdriver-cd/gitversion/releases/latest \
       | egrep -o '/screwdriver-cd/gitversion/releases/download/v[0-9.]*/gitversion_linux_amd64' \
       | wget --base=http://github.com/ -i - -O /tmp/gitversion
     chmod +x $GIT_VERSION
