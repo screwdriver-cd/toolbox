@@ -16,7 +16,7 @@ fi
 # For openssh < 7.4
 OLD_GITHUB_FINGERPRINT=16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48
 # For openssh >= 7.4
-NEW_GITHUB_FINGERPRINT=SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8
+NEW_GITHUB_FINGERPRINT=SHA256:uNiVztksCsDhcc0u9e8BujQXVUpKZIDTMczCvj3tD2s
 
 echo Addding github.com to known_hosts
 mkdir -p /root/.ssh
