@@ -8,6 +8,4 @@ if [ -z "$IMAGE" ] || [ -z "$VERSION" ] || [ -z "$TYPE" ]; then
   exit 2
 fi
 
-docker pull screwdrivercd/$IMAGE:$VERSION
-docker tag screwdrivercd/$IMAGE:$VERSION screwdrivercd/$IMAGE:$TYPE
-docker push screwdrivercd/$IMAGE:$TYPE
+docker buildx imagetools create -t screwdrivercd/$IMAGE:$TYPE screwdrivercd/$IMAGE:$VERSION
