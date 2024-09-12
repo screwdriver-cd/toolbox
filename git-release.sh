@@ -46,7 +46,23 @@ echo "Creating tag $GIT_TAG for $GIT_ORG / $GIT_REPO"
 $GITHUB_RELEASE release --user $GIT_ORG --repo $GIT_REPO --tag $GIT_TAG --name $GIT_TAG
 
 echo "Querying tag $GIT_TAG for $GIT_ORG / $GIT_REPO"
-$GITHUB_RELEASE info --user $GIT_ORG --repo $GIT_REPO --tag $GIT_TAG
+max_attempts=5
+attempt=1
+while [ $attempt -le $max_attempts ]; do
+  if $GITHUB_RELEASE info --user "$GIT_ORG" --repo "$GIT_REPO" --tag "$GIT_TAG"; then
+    echo "Successfully retrieved release info on attempt $attempt"
+    break
+  else
+    echo "Attempt $attempt: Failed to query release info. Retrying in 5 seconds..."
+    sleep 5
+    attempt=$((attempt + 1))
+  fi
+done
+
+if [ $attempt -gt $max_attempts ]; then
+  echo "Failed to query release info after $max_attempts attempts. Exiting."
+  exit 1
+fi
 
 if [ ! -z "$RELEASE_FILES" ];then
   files=($RELEASE_FILES)
