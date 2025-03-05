@@ -1,7 +1,7 @@
 #!/bin/bash -e
 # GIT_KEY = SSH Deployment key
 # NPM_TOKEN = NPM token for publishing the module
-if [ -z "$GIT_KEY" ] || [ -z "$GIT_KEY_BASE64" ] || [ -z "$NPM_TOKEN" ]; then
+if { [ -z "$GIT_KEY" ] && [ -z "$GIT_KEY_BASE64" ]; } || [ -z "$NPM_TOKEN" ]; then
   echo Unable to publish, missing environment variables
   exit 2
 fi
